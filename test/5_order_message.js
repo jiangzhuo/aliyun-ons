@@ -5,17 +5,20 @@
  */
 "use strict";
 
+const should = require("should");
 const config = require("./config");
 
 describe("#order message", function() {
     const Producer = require("../").Producer;
     const Consumer = require("../").Consumer;
     const producer = new Producer(config.producerId, config.accessKey, config.secretKey, {
-        onsAddr: "http://onsaddr-internet.aliyun.com:80/rocketmq/nsaddr4client-internet",
+        // onsAddr: "http://onsaddr-internet.aliyun.com:80/rocketmq/nsaddr4client-internet",
+        namesrvAddr:"http://MQ_INST_1907979290938635_BbxzGa84.mq-internet-access.mq-internet.aliyuncs.com:80",
         order: true
     });
     const consumer = new Consumer(config.consumerId, config.topic, "*", config.accessKey, config.secretKey, {
-        onsAddr: "http://onsaddr-internet.aliyun.com:80/rocketmq/nsaddr4client-internet",
+        // onsAddr: "http://onsaddr-internet.aliyun.com:80/rocketmq/nsaddr4client-internet",
+        namesrvAddr:"http://MQ_INST_1907979290938635_BbxzGa84.mq-internet-access.mq-internet.aliyuncs.com:80",
         order: true
     });
 

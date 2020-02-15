@@ -4,6 +4,7 @@
 #include "Message.h"
 #include "SendResultONS.h"
 #include "ONSClientException.h"
+#include "MessageQueueONS.h"
 
 namespace ons {
 
@@ -20,6 +21,8 @@ class  ONSCLIENT_API Producer {
   // retry max 3 times if send failed. if no exception throwed, it sends
   // success;
   virtual ons::SendResultONS send(Message& msg) throw(ons::ONSClientException) = 0;
+  virtual ons::SendResultONS send(Message& msg,
+      const MessageQueueONS& mq) throw(ons::ONSClientException) = 0;
 
   // async send
  // virtual void sendAsync(Message& msg, ons::SendCallbackONS* callback) throw(ons::ONSClientException) = 0;

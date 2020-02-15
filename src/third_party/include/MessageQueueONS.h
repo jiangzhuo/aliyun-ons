@@ -29,18 +29,10 @@ class MessageQueueONS {
   bool operator<(const MessageQueueONS& mq) const;
   int compareTo(const MessageQueueONS& mq) const;
 
-  const string toString() const {
-    stringstream ss;
-    ss << "MessageQueue [topic=" << topic_ << ", brokerName=" << brokerName_
-       << ", queueId=" << queueId_ << "]";
-
-    return ss.str();
-  }
-
  private:
-  string topic_;
-  string brokerName_;
-  int queueId_;
+  string m_topic;
+  string m_brokerName;
+  int m_queueId;
 };
 
 }  //<!end namespace;

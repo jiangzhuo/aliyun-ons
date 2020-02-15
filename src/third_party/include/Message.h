@@ -22,10 +22,10 @@ class  SystemPropKey {
 class  ONSCLIENT_API Message {
  public:
   Message();
-  Message(const char* topic, const char* tags, const char* body);
-	// Message(const char* topci, size_t topic_size, const char* tags, size_t tags_size, const char* body, size_t body_size);
-  Message(const char* topic, const char* tags, const char* keys,
-		const char* body);
+  Message(const std::string& topic, const std::string& tags, const std::string& byte_body);
+  Message(const char* topic, const char* tags, const char* byte_body);
+  Message(const char* topic, size_t topic_size, const char* tags, size_t tags_size, const char* body, size_t body_size);
+  Message(const char* topic, const char* tags, const char* keys, const char* body);
 
   virtual ~Message();
 
@@ -61,8 +61,10 @@ class  ONSCLIENT_API Message {
   const long long getStartDeliverTime() const;
   void setStartDeliverTime(long long level);
 
-	const char* getBody() const;
-  void setBody(const char* msgbody);
+  const char* getBody() const;
+  const std::string getMsgBody() const;
+  void setMsgBody(const std::string msgbody);
+  void setBody(unsigned char* byte_msgbody, int len);
 
   const int getReconsumeTimes() const;
   void setReconsumeTimes(int reconsumeTimes);
@@ -76,6 +78,8 @@ class  ONSCLIENT_API Message {
 
   const std::string toUserString() const;
 
+  long long getQueueOffset() const;
+  void setQueueOffset(long long queueOffset);
  protected:
   void Init(const std::string& topic, const std::string& tags,
             const std::string& keys, const std::string& body);
@@ -84,6 +88,7 @@ class  ONSCLIENT_API Message {
   std::string topic;
   std::string body;
   long long m_storeTimestamp;
+  long long m_queueOffset;
   std::map<std::string, std::string> systemProperties;
   std::map<std::string, std::string> userProperties;
 };

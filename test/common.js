@@ -15,10 +15,14 @@ var config = require("./config");
 module.exports = {
     consumer: new Consumer(config.consumerId, config.topic, "*", config.accessKey, config.secretKey, {
         threadNum: 1,
-        onsAddr: "http://onsaddr-internet.aliyun.com:80/rocketmq/nsaddr4client-internet"
+        namesrvAddr:"http://MQ_INST_1907979290938635_BbxzGa84.mq-internet-access.mq-internet.aliyuncs.com:80",
+        // onsAddr: "http://1907979290938635.mqrest.cn-qingdao-public.aliyuncs.com"
+        // onsAddr: "http://onsaddr-internet.aliyun.com:80/rocketmq/nsaddr4client-internet"
     }),
     producer: new Producer(config.producerId, config.accessKey, config.secretKey, {
-        onsAddr: "http://onsaddr-internet.aliyun.com:80/rocketmq/nsaddr4client-internet"
+        namesrvAddr:"http://MQ_INST_1907979290938635_BbxzGa84.mq-internet-access.mq-internet.aliyuncs.com:80",
+        // onsAddr: "http://1907979290938635.mqrest.cn-qingdao-public.aliyuncs.com"
+        // onsAddr: "http://onsaddr-internet.aliyun.com:80/rocketmq/nsaddr4client-internet"
     }),
     logs: []
 };

@@ -7,6 +7,7 @@
 #include "OrderProducer.h"
 #include "Producer.h"
 #include "PushConsumer.h"
+#include "PullConsumer.h"
 #include "TransactionProducer.h"
 #include "ONSClientException.h"
 
@@ -42,8 +43,12 @@ class  ONSCLIENT_API ONSFactoryProperty {
 	const char* getNameSrvDomain() const;
 	const char* getAccessKey() const;
 	const char* getSecretKey() const;
+	const char* getConsumerInstanceName() const;
   bool getOnsTraceSwitch() const;
-  
+
+  const char* getNameSpace() const;
+  std::string getNameSpaceS() const;
+
  public:
   static const char* LogPath;
   static const char* ProducerId;
@@ -63,6 +68,9 @@ class  ONSCLIENT_API ONSFactoryProperty {
   static const char* MaxMsgCacheSize;
   static const char* OnsTraceSwitch;
   static const char* SendMsgRetryTimes;
+  static const char* ConsumerInstanceName;
+
+  static const char* InstanceId;
 
  private:
   std::map<std::string, std::string> m_onsFactoryProperties;
@@ -80,6 +88,7 @@ class  ONSCLIENT_API ONSFactoryAPI {
       ons::ONSFactoryProperty factoryProperty) throw(ons::ONSClientException);
   virtual ons::TransactionProducer* createTransactionProducer(
       ons::ONSFactoryProperty factoryProperty, ons::LocalTransactionChecker* checker) throw(ons::ONSClientException);
+  virtual ons::PullConsumer* createPullConsumer(ons::ONSFactoryProperty factoryProperty) throw(ons::ONSClientException);
   virtual ons::PushConsumer* createPushConsumer(ons::ONSFactoryProperty factoryProperty) throw(ons::ONSClientException);
 };
 

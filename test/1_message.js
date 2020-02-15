@@ -10,7 +10,32 @@ const should = require("should");
 
 const config = require("./config");
 
-describe("#message", function() {
+// before('clear queue', function (done) {
+//     this.timeout(30000);
+//     const Consumer = require("../").Consumer;
+//     const consumer = new Consumer(config.consumerId, config.topic, "tagA", config.accessKey, config.secretKey, {
+//         // onsAddr: "http://onsaddr-internet.aliyun.com:80/rocketmq/nsaddr4client-internet",
+//         namesrvAddr: "http://MQ_INST_1907979290938635_BbxzGa84.mq-internet-access.mq-internet.aliyuncs.com:80"
+//     });
+//
+//     consumer.init(function () {
+//
+//         consumer.on("message", function (msg, ack) {
+//             console.log('clear consumer')
+//             ack.done();
+//         });
+//
+//         consumer.listen();
+//
+//         setTimeout(() => {
+//             consumer.stop(() => {
+//                 done()
+//             });
+//         }, 10000)
+//     });
+// });
+
+describe("#message", function () {
     const consumer = require("./common").consumer;
     const producer = require("./common").producer;
     const date = new Date();
@@ -18,9 +43,10 @@ describe("#message", function() {
 
     let message;
     let ack;
+
     function waitMessage(callback) {
         function wait() {
-            if(!message || !ack) {
+            if (!message || !ack) {
                 return setTimeout(wait, 50);
             }
 
@@ -36,13 +62,13 @@ describe("#message", function() {
 
     this.timeout(0);
 
-    it("should start producer", function(done) {
+    it("should start producer", function (done) {
         producer.start(done);
     });
 
-    it("should start consumer", function(done) {
-        consumer.init(function() {
-            consumer.on("message", function(_message, _ack) {
+    it("should start consumer", function (done) {
+        consumer.init(function () {
+            consumer.on("message", function (_message, _ack) {
                 message = _message;
                 ack = _ack;
             });
@@ -52,13 +78,13 @@ describe("#message", function() {
         });
     });
 
-    describe("#oneway", function() {
-        it("should send oneway message", function() {
+    describe("#oneway", function () {
+        it("should send oneway message", function () {
             producer.send(config.topic, "tagA", "单向!");
         });
 
-        it("should get oneway message", function(done) {
-            waitMessage(function(err, message, ack) {
+        it("should get oneway message", function (done) {
+            waitMessage(function (err, message, ack) {
                 ack.done(true);
 
                 message.topic.should.be.eql(config.topic);
@@ -74,8 +100,8 @@ describe("#message", function() {
         });
     });
 
-    describe("#send & consume", function() {
-        it("should send an immediate message", function(done) {
+    describe("#send & consume", function () {
+        it("should send an immediate message", function (done) {
             producer.send(
                 config.topic,
                 "tagA",
@@ -87,8 +113,8 @@ describe("#message", function() {
                 });
         });
 
-        it("should get one message", function(done) {
-            waitMessage(function(err, message, ack) {
+        it("should get one message", function (done) {
+            waitMessage(function (err, message, ack) {
                 ack.done(false);
 
                 message.topic.should.be.eql(config.topic);
@@ -103,8 +129,8 @@ describe("#message", function() {
             });
         });
 
-        it("should reconsume", function(done) {
-            waitMessage(function(err, message, ack) {
+        it("should reconsume", function (done) {
+            waitMessage(function (err, message, ack) {
                 ack.done();
 
                 message.topic.should.be.eql(config.topic);
@@ -121,21 +147,21 @@ describe("#message", function() {
         });
     });
 
-    describe("#timing", function() {
-        it("should send a timing message", function(done) {
+    describe("#timing", function () {
+        it("should send a timing message", function (done) {
             producer.send(
                 config.topic,
                 "tagA",
                 "World " + DATE,
                 1000,
-                function(err, id) {
+                function (err, id) {
                     should.ifError(err);
                     id.should.match(/^[0-9a-zA-Z]{32}$/);
                     done();
                 });
         });
 
-        it("should get the timing message", function(done) {
+        it("should get the timing message", function (done) {
             waitMessage(function (err, message, ack) {
                 ack.done(true);
 
@@ -153,8 +179,8 @@ describe("#message", function() {
         });
     });
 
-    describe("#default", function() {
-        it("should create consumer using default options", function(done) {
+    describe("#default", function () {
+        it("should create consumer using default options", function (done) {
             const Consumer = require("../").Consumer;
             const consumer = new Consumer(
                 config.consumerId,

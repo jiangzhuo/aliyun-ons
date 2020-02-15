@@ -7,6 +7,7 @@
 namespace ons {
 class LocalTransactionExecuter {
  public:
+	 LocalTransactionExecuter() {}
   virtual TransactionStatus execute(Message& msg) = 0;
   virtual ~LocalTransactionExecuter() {}
 };

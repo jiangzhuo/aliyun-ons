@@ -40,7 +40,7 @@
           ],
           "cflags_cc!": [ "-fno-exceptions", "-pthread", "-Wl,--no-as-needed", "-ldl" ],
           "cflags_cc": [ "-Wno-ignored-qualifiers" ],
-          "cflags": [ "-std=c++11", "-g" ]
+          "cflags": [ "-std=c++11", "-g", "-D_GLIBCXX_USE_CXX11_ABI=0" ]
         }],
         ["OS==\"win\"", {
           "libraries": [
