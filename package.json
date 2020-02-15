@@ -1,5 +1,5 @@
 {
-  "name": "ons",
+  "name": "@jiangzhuo/ons",
   "version": "4.1.0",
   "description": "SDK of Node.js for Aliyun ONS (Aliyun Open Notification Service).",
   "main": "index.js",
@@ -34,9 +34,9 @@
   "author": "XadillaX <i@2333.moe>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/XadillaX/aliyun-ons/issues"
+    "url": "https://github.com/jiangzhuo/aliyun-ons/issues"
   },
-  "homepage": "https://github.com/XadillaX/aliyun-ons#readme",
+  "homepage": "https://github.com/jiangzhuo/aliyun-ons#readme",
   "dependencies": {
     "blueimp-md5": "^2.7.0",
     "eventemitter2": "^4.1.0",
