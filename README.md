@@ -16,12 +16,14 @@ SDK of Node.js for Aliyun ONS.
 ## Installation
 
 ```sh
-$ npm install --save ons
+$ npm install --save @jiangzhuo/ons
 ```
 
 > **NOTE:** Because of Aliyun ONS C++ SDK's closed source, it only provides Linux and Windows library file (libonsclient4cpp.a, ONSClientCPP.lib). So you can only install this package under Linux and Windows 64x so far.
 >
 > **Current 4.x version of ons supports OSX via incomplete HTTP protocol. Not recommended for stable use.**
+
+> **MODIFIED NOT** Using lastest Aliyun ONS C++ SDK v1.1.2, More information about SDK build from [Aliyun document](https://help.aliyun.com/document_detail/29555.html?spm=a2c4g.11186623.6.596.b5783a04CnEZSL)
 
 ## Usage
 
